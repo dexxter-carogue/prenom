@@ -1,0 +1,7 @@
+node_modules/
+.DS_Store
+.env
+server/data.db
+server/node_modules/
+dist/
+.gemini/

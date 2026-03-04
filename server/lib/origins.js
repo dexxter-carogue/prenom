@@ -1,0 +1,20 @@
+module.exports = {
+    'JEAN': { origin: 'Hébreu', meaning: 'Dieu fait grâce', history: 'Un prénom biblique porté par deux des figures les plus importantes du Nouveau Testament : Jean le Baptiste et l\'apôtre Jean.' },
+    'MARIE': { origin: 'Hébreu', meaning: 'Celle qui élève / Goutte de mer', history: 'Le prénom féminin par excellence dans la tradition chrétienne, ayant dominé les classements pendant des siècles.' },
+    'PIERRE': { origin: 'Grec', meaning: 'Roc / Pierre', history: 'Traduction du nom de l\'apôtre Simon par Jésus, symbolisant la solidité de l\'Église.' },
+    'LUCIEN': { origin: 'Latin', meaning: 'Lumière', history: 'Populaire au début du XXe siècle, il évoque la clarté et la lucidité.' },
+    'LOUISE': { origin: 'Germain', meaning: 'Illustre guerrière', history: 'Un prénom royal porté par de nombreuses reines et saintes, synonyme d\'élégance intemporelle.' },
+    'SARAH': { origin: 'Hébreu', meaning: 'Princesse', history: 'Dans la Bible, Sarah est l\'épouse d\'Abraham et la mère d\'Isaac, symbole de longévité.' },
+    'DAVID': { origin: 'Hébreu', meaning: 'Chéri / Bien-aimé', history: 'Héros biblique vainqueur de Goliath, devenu roi d\'Israël et ancêtre du Messie.' },
+    'JEROME': { origin: 'Grec', meaning: 'Nom sacré', history: 'Porté par Saint Jérôme, le traducteur de la Bible en latin (la Vulgate) au IVe siècle.' },
+    'BERNARD': { origin: 'Germain', meaning: 'Ours courageux', history: 'Très populaire au Moyen Âge, il évoque la force brute alliée à la noblesse.' },
+    'ALICE': { origin: 'Germain', meaning: 'De noble lignée', history: 'Rendu célèbre par l\'œuvre de Lewis Carroll, il suggère la curiosité et l\'imagination.' },
+    'THOMAS': { origin: 'Araméen', meaning: 'Jumeau', history: 'L\'un des douze apôtres, connu pour avoir douté de la résurrection jusqu\'à l\'avoir vue.' },
+    'CAMILLE': { origin: 'Latin', meaning: 'Jeune assistant lors de cérémonies', history: 'Prénom mixte par excellence, il évoque l\'art et l\'engagement (Camille Claudel).' },
+    'PAUL': { origin: 'Latin', meaning: 'Petit', history: 'L\'apôtre Paul a été l\'un des plus grands propagateurs du christianisme primitif.' },
+    'EMMA': { origin: 'Germain', meaning: 'Universelle / Toute-puissante', history: 'D\'abord porté par des reines, il est devenu l\'un des prénoms les plus populaires du XXIe siècle.' },
+    'GABRIEL': { origin: 'Hébreu', meaning: 'Force de Dieu', history: 'L\'archange messager qui annonce la naissance de Jésus à Marie.' },
+    'JULES': { origin: 'Latin', meaning: 'De la famille romaine d\'Iule', history: 'Associé à Jules César, il évoque le pouvoir et l\'ambition tranquille.' },
+    'LEO': { origin: 'Latin', meaning: 'Lion', history: 'Un prénom court et dynamique, symbole de courage et de royauté.' },
+    'CHLOE': { origin: 'Grec', meaning: 'Jeune pousse / Herbe verte', history: 'Une épithète de Déméter, déesse de l\'agriculture, évoquant le printemps.' }
+};

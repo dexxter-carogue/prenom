@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur de Prénoms Français - Trouvez le prénom idéal</title>
+    <meta name="description" content="Générez des suggestions de prénoms français basées sur vos préférences.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <main class="app-container">
+        <header>
+            <h1>Générateur de <span>Prénoms</span></h1>
+            <p>Entrez 3 prénoms que vous aimez pour découvrir nos suggestions sur-mesure.</p>
+        </header>
+
+        <section class="form-card">
+            <form id="generator-form">
+                <div class="input-group">
+                    <label for="name1">Prénom 1</label>
+                    <input type="text" id="name1" placeholder="Ex: Jean" required>
+                </div>
+                <div class="input-group">
+                    <label for="name2">Prénom 2</label>
+                    <input type="text" id="name2" placeholder="Ex: Marie" required>
+                </div>
+                <div class="input-group">
+                    <label for="name3">Prénom 3</label>
+                    <input type="text" id="name3" placeholder="Ex: Pierre" required>
+                </div>
+                <button type="submit" id="generate-btn">
+                    <span class="btn-text">Générer</span>
+                    <span class="loader"></span>
+                </button>
+            </form>
+        </section>
+
+        <section id="results" class="results-container hidden">
+            <h2>Nos Suggestions</h2>
+            <div id="names-grid" class="names-grid">
+                <!-- Les prénoms seront insérés ici -->
+            </div>
+            <div class="results-actions">
+                <button id="reset-btn" class="secondary-btn">Recommencer</button>
+                <button id="download-btn" class="secondary-btn">Exporter la liste</button>
+                <button id="more-btn" class="primary-btn-sm">Générer 5 autres</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Nom de l'App. Créé avec passion pour les futurs parents.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
