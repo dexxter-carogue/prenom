@@ -395,6 +395,34 @@ header p {
     color: var(--text-muted);
 }
 
+.wiki-section {
+    background: linear-gradient(135deg, #faf5ff, #f0f9ff);
+    border: 1px solid #e0e7ff;
+    border-radius: 16px;
+    padding: 1.25rem 1.5rem;
+    font-size: 0.9rem;
+    color: var(--text-main);
+    line-height: 1.65;
+}
+
+.wiki-extract {
+    margin-bottom: 0.75rem;
+}
+
+.wiki-link {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--primary);
+    text-decoration: none;
+    transition: opacity 0.15s;
+}
+
+.wiki-link:hover {
+    opacity: 0.75;
+    text-decoration: underline;
+}
+
 .card-footer {
     margin-top: auto;
     padding-top: 1.2rem;

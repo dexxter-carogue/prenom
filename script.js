@@ -251,7 +251,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 ${data.story ? `
                 <div class="name-story">
-                    <p>${data.story.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*(.*?)\*/g, '<em>$1</em>')}</p>
+                    <p>${data.story.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*(.*?)\*/g, '<em>$1</em>').replace(/\n\n/g, '</p><p>')}</p>
+                </div>
+                ` : ''}
+
+                ${data.wiki ? `
+                <div class="wiki-section">
+                    <p class="wiki-extract">${data.wiki.extract}</p>
+                    ${data.wiki.page ? `<a class="wiki-link" href="${data.wiki.page}" target="_blank" rel="noopener">Lire sur Wikipédia  →</a>` : ''}
                 </div>
                 ` : ''}
 

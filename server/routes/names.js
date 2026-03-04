@@ -4,6 +4,7 @@ const deptsMap = require('../lib/depts');
 const originsMap = require('../lib/origins');
 const regionsMap = require('../lib/regions');
 const { fetchBtnData } = require('../services/enrichment');
+const { fetchWikiData } = require('../services/wikipedia');
 
 const router = express.Router();
 
@@ -40,8 +41,11 @@ router.get('/name', async (req, res) => {
         }
 
         const stats = calculateAdvancedStats(normalizedPrenom, targetDbSexe);
-        const btnData = await fetchBtnData(normalizedPrenom);
-        const story = generateStory(normalizedPrenom, stats, btnData);
+        const [btnData, wikiData] = await Promise.all([
+            fetchBtnData(normalizedPrenom),
+            fetchWikiData(normalizedPrenom)
+        ]);
+        const story = generateStory(normalizedPrenom, stats, btnData, wikiData);
 
         res.json({
             prenom: normalizedPrenom,
@@ -49,9 +53,11 @@ router.get('/name', async (req, res) => {
             stats,
             story,
             enrichment: btnData,
+            wiki: wikiData,
             sources: [
                 { type: 'INSEE', via: 'data.gouv' },
-                ...(btnData ? [{ type: 'API', via: 'BehindTheName' }] : [])
+                ...(btnData ? [{ type: 'API', via: 'BehindTheName' }] : []),
+                ...(wikiData ? [{ type: 'API', via: 'Wikipedia' }] : [])
             ]
         });
     } catch (error) {
@@ -162,7 +168,7 @@ function getRankInDecade(prenom, sexe, decade) {
     return rank > 0 ? rank : null;
 }
 
-function generateStory(prenom, stats, btnData) {
+function generateStory(prenom, stats, btnData, wikiData) {
     if (!stats) return null;
     const origin = originsMap[prenom];
     let text = "";
@@ -172,15 +178,18 @@ function generateStory(prenom, stats, btnData) {
         text += `${prenom} est un prénom d'origine **${origin.origin}**. Il signifie « *${origin.meaning}* ». ${origin.history} `;
     }
 
-    // 2. Origine / Informations complémentaires via BTN
+    // 2. Usages via BTN (si pas d'origine locale)
     if (btnData && btnData.length > 0) {
         const primaryMeaning = btnData[0];
-
-        // Si on n'a pas d'origine locale, on utilise BTN
         if (!origin && primaryMeaning.usages && primaryMeaning.usages.length > 0) {
             const usagesStr = primaryMeaning.usages.map(u => u.usage_full).join(', ');
             text += `Selon *Behind the Name*, ${prenom} est principalement répertorié pour les usages suivants : ${usagesStr}. `;
         }
+    }
+
+    // 3. Histoire via Wikipédia (si disponible)
+    if (wikiData && wikiData.extract) {
+        text += `\n\n**Histoire (Wikipédia)** : ${wikiData.extract}`;
     }
 
     if (origin || stats.total_naissances > 3000) {
