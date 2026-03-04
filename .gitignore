@@ -5,3 +5,5 @@ server/data.db
 server/node_modules/
 dist/
 .gemini/
+*.db-shm
+*.db-wal
