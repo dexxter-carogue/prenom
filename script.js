@@ -5,8 +5,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const resetBtn = document.getElementById('reset-btn');
     const generateBtn = document.getElementById('generate-btn');
     const moreBtn = document.getElementById('more-btn');
+    const downloadBtn = document.getElementById('download-btn');
 
     let lastInputs = [];
+    let currentResults = [];
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();

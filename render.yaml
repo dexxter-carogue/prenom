@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: prenom-generator
+    runtime: node
+    buildCommand: npm install --prefix server
+    startCommand: npm start --prefix server
+    envVars:
+      - key: ADMIN_TOKEN
+        generateValue: true
+      - key: BTN_API_KEY
+        sync: false
+      - key: DB_PATH
+        value: /var/data/data.db
+      - key: NODE_VERSION
+        value: 18
+    disk:
+      name: data
+      mountPath: /var/data
+      sizeGB: 1
