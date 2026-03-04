@@ -239,6 +239,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                     </div>
                     ` : ''}
+                    ${data.enrichment && data.enrichment.length > 0 && data.enrichment[0].usages ? `
+                    <div class="btn-usages">
+                        <span class="label">Usages (Behind the Name) :</span>
+                        <div class="dpt-list">
+                            ${data.enrichment[0].usages.map(u => `<span class="dpt-tag">${u.usage_full}</span>`).join('')}
+                        </div>
+                    </div>
+                    ` : ''}
                 </div>
 
                 ${data.story ? `

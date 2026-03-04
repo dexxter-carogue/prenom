@@ -3,6 +3,7 @@ const { db } = require('../lib/database');
 const deptsMap = require('../lib/depts');
 const originsMap = require('../lib/origins');
 const regionsMap = require('../lib/regions');
+const { fetchBtnData } = require('../services/enrichment');
 
 const router = express.Router();
 
@@ -39,14 +40,19 @@ router.get('/name', async (req, res) => {
         }
 
         const stats = calculateAdvancedStats(normalizedPrenom, targetDbSexe);
-        const story = generateStory(normalizedPrenom, stats);
+        const btnData = await fetchBtnData(normalizedPrenom);
+        const story = generateStory(normalizedPrenom, stats, btnData);
 
         res.json({
             prenom: normalizedPrenom,
             sexe: detectedSexeLabel,
             stats,
             story,
-            sources: [{ type: 'INSEE', via: 'data.gouv' }]
+            enrichment: btnData,
+            sources: [
+                { type: 'INSEE', via: 'data.gouv' },
+                ...(btnData ? [{ type: 'API', via: 'BehindTheName' }] : [])
+            ]
         });
     } catch (error) {
         console.error('API Name Error:', error);
@@ -156,13 +162,25 @@ function getRankInDecade(prenom, sexe, decade) {
     return rank > 0 ? rank : null;
 }
 
-function generateStory(prenom, stats) {
+function generateStory(prenom, stats, btnData) {
     if (!stats) return null;
     const origin = originsMap[prenom];
     let text = "";
 
+    // 1. Origine depuis nos données locales (s'il y en a)
     if (origin) {
         text += `${prenom} est un prénom d'origine **${origin.origin}**. Il signifie « *${origin.meaning}* ». ${origin.history} `;
+    }
+
+    // 2. Origine / Informations complémentaires via BTN
+    if (btnData && btnData.length > 0) {
+        const primaryMeaning = btnData[0];
+
+        // Si on n'a pas d'origine locale, on utilise BTN
+        if (!origin && primaryMeaning.usages && primaryMeaning.usages.length > 0) {
+            const usagesStr = primaryMeaning.usages.map(u => u.usage_full).join(', ');
+            text += `Selon *Behind the Name*, ${prenom} est principalement répertorié pour les usages suivants : ${usagesStr}. `;
+        }
     }
 
     if (origin || stats.total_naissances > 3000) {
